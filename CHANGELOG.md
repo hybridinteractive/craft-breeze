@@ -8,6 +8,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - Initial release
 
-## 1.0.11 - 2018-10-31
+## 1.0.1 - 2018-10-31
 ### Added
 - Logos, updated svgs
