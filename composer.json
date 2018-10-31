@@ -1,0 +1,43 @@
+{
+    "name": "hybridinteractive/craft-breeze",
+    "description": "Breeze aims making rapid prototyping, well, a breeze. It is built on Craft and utilizing Tailwind CSS.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft breeze"
+    ],
+    "support": {
+        "docs": "https://github.com/hybridinteractive/craft-breeze/blob/master/README.md",
+        "issues": "https://github.com/hybridinteractive/craft-breeze/issues"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Hybrid Interactive",
+            "homepage": "https://hybridinteractive.io/"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+            "hybridinteractive\\craftbreeze\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Breeze",
+        "handle": "breeze",
+        "hasCpSettings": true,
+        "hasCpSection": true,
+        "changelogUrl": "https://raw.githubusercontent.com/hybridinteractive/craft-breeze/master/CHANGELOG.md",
+        "components": {
+            "breeze": "hybridinteractive\\craftbreeze\\services\\Breeze"
+        },
+        "class": "hybridinteractive\\craftbreeze\\CraftBreeze"
+    }
+}

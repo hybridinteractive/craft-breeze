@@ -1,0 +1,246 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{% extends '_layouts/cp' %}
+
+{% import '_includes/forms' as forms %}
+
+{% set title = 'Breeze' %}
+
+{% set tabs = {
+    configuration: {
+        label: 'Configuration',
+        url: '#configuration'
+    }
+} %}
+
+{% set selectedItem = craft.app.request.getSegment(3)|default("configuration") %}
+
+{% set navItems = {
+    'heading': { heading: "Globals"|t("breeze") }
+} %}
+
+{% set navItems = navItems | merge({
+    colors: {
+        title: "Colors"|t("breeze"),
+        description: "Here you can specify the colors used in your project. To get you started, we've provided a generous palette of great looking colors that are perfect for prototyping, but don't hesitate to change them for your project. You own these colors, nothing will break if you change everything about them."|t("breeze"),
+        fieldType: {
+            type: 'colorField',
+            label: 'Colors',
+            name: 'color',
+            instructions: 'color desc for FT',
+        }
+    },
+    breakpoints: {
+        title: "Break Points"|t("breeze"),
+    },
+    typography: {
+        title: "Typography"|t("breeze"),
+        description: "Set your font type, sizes, and weights"|t("breeze")
+    },
+    widthsHeights: {
+        heading: "Widths and Heights"|t("breeze"),
+        description: "Widths and Heights description"|t("breeze")
+    },
+    width: {
+        title: "Widths"|t("breeze"),
+    },
+    height: {
+        title: "Heights"|t("breeze"),
+    },
+    paddingMargin: {
+        heading: "Padding and Margin"|t("breeze"),
+    },
+    padding: {
+        title: "Padding"|t("breeze"),
+    },
+    margin: {
+        title: "Margins"|t("breeze"),
+    },
+}) %}
+
+{% block sidebar %}
+    <nav>
+        <ul>
+            {% for id, item in navItems %}
+                {% if item.heading is defined %}
+                    <li class="heading"><span>{{ item.heading }}</span></li>
+                {% else %}
+                    <li><a href="{{ url("breeze##{id}/") }}"{% if id == selectedItem %} class="sel"{% endif %}>{{ item.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block content %}
+
+    <div id="configuration">
+
+        {#{% for id, item in navItems %}#}
+            {#<div id="{{ id }}" class="field">#}
+                {#{% if item.heading is defined %}#}
+                    {#<h2 class="heading">{{ item.heading }}</h2>#}
+                {#{% else %}#}
+                    {#<h3>{{ item.title }}</h3>#}
+                {#{% endif %}#}
+                {#{% if item.description is defined %}#}
+                    {#<div class="instructions">#}
+                        {#<p>{{ item.description }}</p>#}
+                    {#</div>#}
+                {#{% endif %}#}
+                {#{% if item.fieldType is defined %}#}
+                    {#{% embed "_includes/forms/field" with {#}
+                        {#label: item.fieldType.label|t('site')|e,#}
+                        {#instructions: item.fieldType.instructions|e,#}
+                        {#id: item.fieldType.name,#}
+                        {#fieldType: item.fieldType.type,#}
+                        {#input: item.fieldType.type#}
+                    {#} only %}#}
+                        {#{% block attr %}data-type="{{ fieldType }}"{% endblock %}#}
+                    {#{% endembed %}#}
+                {#{% endif %}#}
+            {#</div>#}
+        {#{% endfor %}#}
+
+        <div id="colors" class="field">
+            <h3>Colors</h3>
+            <div class="instructions">
+                <p>Here you can specify the colors used in your project. To get you started, we've provided a generous palette of great looking colors that are perfect for prototyping, but don't hesitate to change them for your project. You own these colors, nothing will break if you change everything about them.</p>
+            </div>
+
+            <table id="site-sameAsLinks" class="shadow-box editable">
+                <thead>
+                    <tr>
+                        <th scope="col" class="">Name</th>
+                        <th scope="col" class="">Value</th>
+                        <th colspan="2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-id="transparent">
+                        <td class="textual">
+                            <textarea name="" rows="1" style="min-height: 34px;">transparent</textarea>
+                        </td>
+                        <td class="textual">
+                            {{ forms.colorField({
+                            value: 'transparent',
+                            name: 'color'
+                            }) }}
+                        </td>
+                        <td class="thin action"><a class="move icon" title="Reorder"></a></td>
+                        <td class="thin action"><a class="delete icon" title="Delete"></a></td>
+                    </tr>
+                    <tr data-id="black">
+                        <td class="textual">
+                            <textarea name="" rows="1" style="min-height: 34px;">black</textarea>
+                        </td>
+                        <td class="textual">
+                            {{ forms.colorField({
+                                value: '222b2f',
+                                name: 'color'
+                            }) }}
+                        </td>
+                        <td class="thin action"><a class="move icon" title="Reorder"></a></td>
+                        <td class="thin action"><a class="delete icon" title="Delete"></a></td>
+                    </tr>
+                    <tr data-id="white">
+                        <td class="textual">
+                            <textarea name="" rows="1" style="min-height: 34px;">white</textarea>
+                        </td>
+                        <td class="textual">
+                            {{ forms.colorField({
+                                value: 'ffffff',
+                                name: 'color'
+                            }) }}
+                        </td>
+                        <td class="thin action"><a class="move icon" title="Reorder"></a></td>
+                        <td class="thin action"><a class="delete icon" title="Delete"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="breakpoints" class="field">
+            <h3>Breakpoints</h3>
+            <div class="instructions">
+                <p>Screens in Tailwind are translated to CSS media queries. They define the  responsive breakpoints for your project. By default Tailwind takes a  "mobile first" approach, where each screen size represents a minimum  viewport width. Feel free to have as few or as many screens as you  want, naming them in whatever way you'd prefer for your project.</p>
+            </div>
+
+            <table id="site-sameAsLinks" class="shadow-box editable">
+                <thead>
+                <tr>
+                    <th scope="col" class="">Name</th>
+                    <th scope="col" class="">Value</th>
+                    <th colspan="2"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-id="sm">
+                    <td class="textual">
+                        <textarea name="" rows="1" style="min-height: 34px;">sm</textarea>
+                    </td>
+                    <td class="textual">
+                        {{ forms.textField({
+                            value: 'sm',
+                            name: 'breakpoint'
+                        }) }}
+                    </td>
+                    <td class="thin action"><a class="move icon" title="Reorder"></a></td>
+                    <td class="thin action"><a class="delete icon" title="Delete"></a></td>
+                </tr>
+                <tr data-id="md">
+                    <td class="textual">
+                        <textarea name="" rows="1" style="min-height: 34px;">md</textarea>
+                    </td>
+                    <td class="textual">
+                        {{ forms.textField({
+                            value: 'md',
+                            name: 'breakpoint'
+                        }) }}
+                    </td>
+                    <td class="thin action"><a class="move icon" title="Reorder"></a></td>
+                    <td class="thin action"><a class="delete icon" title="Delete"></a></td>
+                </tr>
+                <tr data-id="lg">
+                    <td class="textual">
+                        <textarea name="" rows="1" style="min-height: 34px;">lg</textarea>
+                    </td>
+                    <td class="textual">
+                        {{ forms.textField({
+                            value: 'lg',
+                            name: 'breakpoint'
+                        }) }}
+                    </td>
+                    <td class="thin action"><a class="move icon" title="Reorder"></a></td>
+                    <td class="thin action"><a class="delete icon" title="Delete"></a></td>
+                </tr>
+                <tr data-id="xl">
+                    <td class="textual">
+                        <textarea name="" rows="1" style="min-height: 34px;">xl</textarea>
+                    </td>
+                    <td class="textual">
+                        {{ forms.textField({
+                            value: 'xl',
+                            name: 'breakpoint'
+                        }) }}
+                    </td>
+                    <td class="thin action"><a class="move icon" title="Reorder"></a></td>
+                    <td class="thin action"><a class="delete icon" title="Delete"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    {#<div id="extra-div" class="hidden">#}
+
+        {#{{ forms.colorField(#}{#}#}
+            {#label: 'Dummy Date field',#}
+            {#name: 'color',#}
+            {#instructions: 'Dummy instructions',#}
+            {#first: true,#}
+        {#}) }}#}
+    {#</div>#}
+
+{% endblock %}
